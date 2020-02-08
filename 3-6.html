@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue 中的样式绑定</title>
+		<script src="vue.js"></script>
+		<style>
+			.activated,.active{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- class的对象绑定 -->
+			<div @click="handclick" :class="{activated:isActivated}">
+				hello wold
+			</div>
+			<div @click="handclick1" :class="[active]">
+				hello wold111
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm=new Vue({
+			el:"#app",
+			data:{
+				isActivated:false,
+				active:""
+			},
+			methods:{
+				// class的对象绑定
+				handclick(){
+					this.isActivated=!this.isActivated;
+				},
+				handclick1(){
+					this.active=this.active==="active"?"":"active";
+				}
+			}
+		})
+	</script>
+</html>

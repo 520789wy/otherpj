@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>子组件向父组件传值</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="booksName">
+			<button @click="submit">提交</button>
+			<ul>
+				<todo-item v-for="(book,index) in Books" 
+				:index="index" :content="book" @delete="BookDelte">
+			    </todo-item>
+			</ul>
+		</div>
+	</body>
+	
+	<script>
+		/**父组件与子组件的传值
+		 * 父组件向子组件传值用v-bind :xxx,子组件用props接收
+		 * 子组件向父组件传值用$emit
+		 */
+		
+		var TodoItem={
+			props:['content','index'],
+			template:'<li @click="itemclick">{{content}}</li>',
+			methods:{
+				itemclick(){
+					this.$emit("delete",this.index);
+				}
+			}
+		}
+		
+		var app=new Vue({
+			el:"#app",
+			data:{
+				Books:[],
+				booksName:'',
+			},
+			components:{
+				TodoItem
+			},
+			methods:{
+				submit(){
+					this.Books.push(this.booksName);
+					this.booksName=''
+				},
+				BookDelte(index){
+					
+					this.Books.splice(index,1);
+				}
+			}
+		})
+		
+	</script>
+</html>

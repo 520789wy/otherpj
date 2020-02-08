@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性，方法，监听器</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{fallName}}
+		</div>
+		<script type="text/javascript">
+			let vm=new Vue({
+				el:"#app",
+				data:{
+					firstName:'田',
+					lastName:'丹丹',
+				},
+				methos:{
+					fallName(){
+							return this.firstName+''+this.lastName
+					 	}
+				}
+				//计算属性
+				// computed:{
+				// 	fallName(){
+				// 		return this.firstName+''+this.lastName
+				// 	}
+				// }
+			})
+		</script>
+	</body>
+</html>
